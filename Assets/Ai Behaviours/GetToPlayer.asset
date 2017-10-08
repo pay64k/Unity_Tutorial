@@ -14,16 +14,16 @@ MonoBehaviour:
   brickName: Assets/Ai Behaviours/GetToPlayer.asset
   xml: "\uFEFF<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<BehaviorBricks xmlns:ref=\"urn:padaone\"
     version=\"1.0\">\r\n  <BehaviorTree id=\"0\" />\r\n  <runtimeInfo>\r\n    <BehaviorTree
-    id=\"0\" guid=\"a1b2006ef03038c42a7b97a404a1a676\" nextId=\"61\">\r\n      <root>\r\n
-    \       <RepeatDecorator id=\"56\" />\r\n      </root>\r\n      <inputParams />\r\n
+    id=\"0\" guid=\"a1b2006ef03038c42a7b97a404a1a676\" nextId=\"64\">\r\n      <root>\r\n
+    \       <RepeatDecorator id=\"63\" />\r\n      </root>\r\n      <inputParams />\r\n
     \     <outputParams>\r\n        <outputValues>\r\n          <entry name=\"Player\"
     type=\"UnityEngine.GameObject\" isBlackboard=\"True\" />\r\n        </outputValues>\r\n
     \     </outputParams>\r\n      <localParams>\r\n        <localValues>\r\n          <entry
     name=\"area\" type=\"UnityEngine.GameObject\" isBlackboard=\"False\" />\r\n        </localValues>\r\n
-    \     </localParams>\r\n    </BehaviorTree>\r\n    <RepeatDecorator id=\"56\"
+    \     </localParams>\r\n    </BehaviorTree>\r\n    <RepeatDecorator id=\"63\"
     loops=\"-1\" policy=\"ContinueWhenChildFails\">\r\n      <child>\r\n        <ParallelNode
-    id=\"54\" />\r\n      </child>\r\n      <inputParams />\r\n      <outputParams
-    />\r\n      <localParams />\r\n    </RepeatDecorator>\r\n    <ParallelNode id=\"54\"
+    id=\"61\" />\r\n      </child>\r\n      <inputParams />\r\n      <outputParams
+    />\r\n      <localParams />\r\n    </RepeatDecorator>\r\n    <ParallelNode id=\"61\"
     policy=\"AndPolicy\">\r\n      <children>\r\n        <elem>\r\n          <ActionNode
     id=\"55\" />\r\n        </elem>\r\n        <elem>\r\n          <PrioritySelectorNode
     id=\"37\" />\r\n        </elem>\r\n      </children>\r\n      <inputParams />\r\n
@@ -42,7 +42,7 @@ MonoBehaviour:
     \           <child>\r\n              <SubbehaviorNode id=\"58\" />\r\n            </child>\r\n
     \         </GuardAndNode>\r\n        </elem>\r\n      </children>\r\n      <inputParams
     />\r\n      <outputParams />\r\n      <localParams />\r\n    </PrioritySelectorNode>\r\n
-    \   <ConditionEvalNode id=\"53\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\" name=\"Perception/IsTargetClose\">\r\n
+    \   <ConditionEvalNode id=\"53\" policy=\"WAIT_UNTIL_TRUE_AND_COMPLETE\" name=\"Perception/IsTargetClose\">\r\n
     \     <inputParams>\r\n        <inputValues>\r\n          <entry name=\"target\"
     type=\"UnityEngine.GameObject\" isBlackboard=\"True\" blackboard=\"Player\" />\r\n
     \         <entry name=\"closeDistance\" type=\"System.Single\" isBlackboard=\"False\"
@@ -60,42 +60,42 @@ MonoBehaviour:
     \       </inputValues>\r\n      </inputParams>\r\n      <outputParams />\r\n      <localParams
     />\r\n    </SubbehaviorNode>\r\n  </runtimeInfo>\r\n  <editorInfo>\r\n    <BehaviorTree
     id=\"0\" _name=\"GetToPlayer\" _description=\"\" _removeIfClosed=\"False\">\r\n
-    \     <_rootList>\r\n        <elem>\r\n          <RepeatDecorator id=\"56\" />\r\n
+    \     <_rootList>\r\n        <elem>\r\n          <RepeatDecorator id=\"63\" />\r\n
     \       </elem>\r\n      </_rootList>\r\n      <_nodes>\r\n        <nodes>\r\n
     \         <ActionNode id=\"7\" />\r\n          <PrioritySelectorNode id=\"37\"
     />\r\n          <ConditionEvalNode id=\"53\" />\r\n          <ActionNode id=\"55\"
-    />\r\n          <ParallelNode id=\"54\" />\r\n          <RepeatDecorator id=\"56\"
-    />\r\n          <SubbehaviorNode id=\"58\" />\r\n          <ConditionEvalNode
-    id=\"59\" />\r\n        </nodes>\r\n      </_nodes>\r\n      <_selectedNode>\r\n
-    \       <SubbehaviorNode id=\"58\" />\r\n      </_selectedNode>\r\n    </BehaviorTree>\r\n
-    \   <RepeatDecorator id=\"56\">\r\n      <_data>\r\n        <data selected=\"False\"
-    position=\"245 -78\" name=\"Repeat\" description=\"Repeats the execution of its
-    child node\" cardinality=\"1\" hasParent=\"False\">\r\n          <BehaviorTree
-    id=\"0\" />\r\n          <RepeatDecorator id=\"56\" />\r\n        </data>\r\n
-    \     </_data>\r\n    </RepeatDecorator>\r\n    <ParallelNode id=\"54\">\r\n      <_data>\r\n
-    \       <data selected=\"False\" position=\"349 27.64854\" name=\"Parallel\" description=\"Executes
-    all its children at the same time\" cardinality=\"-1\" hasParent=\"True\">\r\n
-    \         <BehaviorTree id=\"0\" />\r\n          <ParallelNode id=\"54\" />\r\n
-    \         <RepeatDecorator id=\"56\" />\r\n        </data>\r\n      </_data>\r\n
-    \   </ParallelNode>\r\n    <ActionNode id=\"55\">\r\n      <_data>\r\n        <data
-    selected=\"False\" position=\"259.1835 211.6964\" name=\"FindByName\" description=\"Finds
-    a game object by name\" cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree
-    id=\"0\" />\r\n          <ActionNode id=\"55\" />\r\n          <ParallelNode id=\"54\"
-    />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n    <PrioritySelectorNode
-    id=\"37\">\r\n      <_data>\r\n        <data selected=\"False\" position=\"530.8124
-    207.3125\" name=\"Priority Selector\" description=\"Executes all its children,
-    starting from the one with the highest priority, until one of them is successful\"
-    cardinality=\"-1\" hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n
-    \         <PrioritySelectorNode id=\"37\" />\r\n          <ParallelNode id=\"54\"
-    />\r\n        </data>\r\n      </_data>\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode
-    id=\"53\">\r\n      <_data>\r\n        <data selected=\"False\" position=\"0 0\"
-    name=\"Perception/IsTargetClose\" description=\"Checks whether a target is close
-    depending on a given distance\" cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree
-    id=\"0\" />\r\n          <ConditionEvalNode id=\"53\" />\r\n          <PrioritySelectorNode
-    id=\"37\" />\r\n        </data>\r\n      </_data>\r\n    </ConditionEvalNode>\r\n
-    \   <ActionNode id=\"7\">\r\n      <_data>\r\n        <data selected=\"False\"
-    position=\"440 408.1792\" name=\"MoveToGameObject\" description=\"Moves the game
-    object towards a given target by using a NavMeshAgent\" cardinality=\"0\" hasParent=\"True\">\r\n
+    />\r\n          <ParallelNode id=\"61\" />\r\n          <SubbehaviorNode id=\"58\"
+    />\r\n          <ConditionEvalNode id=\"59\" />\r\n          <RepeatDecorator
+    id=\"63\" />\r\n        </nodes>\r\n      </_nodes>\r\n    </BehaviorTree>\r\n
+    \   <RepeatDecorator id=\"63\">\r\n      <_data>\r\n        <data selected=\"False\"
+    position=\"182.6087 -42.23602\" name=\"Repeat\" description=\"Repeats the execution
+    of its child node\" cardinality=\"1\" hasParent=\"False\">\r\n          <BehaviorTree
+    id=\"0\" />\r\n          <RepeatDecorator id=\"63\" />\r\n        </data>\r\n
+    \     </_data>\r\n    </RepeatDecorator>\r\n    <ParallelNode id=\"61\">\r\n      <_data>\r\n
+    \       <data selected=\"False\" position=\"381.5714 99.85715\" name=\"Parallel\"
+    description=\"Executes all its children at the same time\" cardinality=\"-1\"
+    hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ParallelNode
+    id=\"61\" />\r\n          <RepeatDecorator id=\"63\" />\r\n        </data>\r\n
+    \     </_data>\r\n    </ParallelNode>\r\n    <ActionNode id=\"55\">\r\n      <_data>\r\n
+    \       <data selected=\"False\" position=\"259.1835 211.6964\" name=\"FindByName\"
+    description=\"Finds a game object by name\" cardinality=\"0\" hasParent=\"True\">\r\n
+    \         <BehaviorTree id=\"0\" />\r\n          <ActionNode id=\"55\" />\r\n
+    \         <ParallelNode id=\"61\" />\r\n        </data>\r\n      </_data>\r\n
+    \   </ActionNode>\r\n    <PrioritySelectorNode id=\"37\">\r\n      <_data>\r\n
+    \       <data selected=\"False\" position=\"530.8124 207.3125\" name=\"Priority
+    Selector\" description=\"Executes all its children, starting from the one with
+    the highest priority, until one of them is successful\" cardinality=\"-1\" hasParent=\"True\">\r\n
+    \         <BehaviorTree id=\"0\" />\r\n          <PrioritySelectorNode id=\"37\"
+    />\r\n          <ParallelNode id=\"61\" />\r\n        </data>\r\n      </_data>\r\n
+    \   </PrioritySelectorNode>\r\n    <ConditionEvalNode id=\"53\">\r\n      <_data>\r\n
+    \       <data selected=\"False\" position=\"0 0\" name=\"Perception/IsTargetClose\"
+    description=\"Checks whether a target is close depending on a given distance\"
+    cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n
+    \         <ConditionEvalNode id=\"53\" />\r\n          <PrioritySelectorNode id=\"37\"
+    />\r\n        </data>\r\n      </_data>\r\n    </ConditionEvalNode>\r\n    <ActionNode
+    id=\"7\">\r\n      <_data>\r\n        <data selected=\"False\" position=\"440
+    437.4895\" name=\"MoveToGameObject\" description=\"Moves the game object towards
+    a given target by using a NavMeshAgent\" cardinality=\"0\" hasParent=\"True\">\r\n
     \         <BehaviorTree id=\"0\" />\r\n          <ActionNode id=\"7\" />\r\n          <ConditionEvalNode
     id=\"53\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n    <ConditionEvalNode
     id=\"59\">\r\n      <_data>\r\n        <data selected=\"False\" position=\"0 0\"
@@ -103,7 +103,7 @@ MonoBehaviour:
     hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ConditionEvalNode
     id=\"59\" />\r\n          <PrioritySelectorNode id=\"37\" />\r\n        </data>\r\n
     \     </_data>\r\n    </ConditionEvalNode>\r\n    <SubbehaviorNode id=\"58\" _name=\"Wander\">\r\n
-    \     <_data>\r\n        <data selected=\"True\" position=\"674 454.4792\" name=\"Wander\"
+    \     <_data>\r\n        <data selected=\"False\" position=\"674 454.4792\" name=\"Wander\"
     description=\"\" cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree
     id=\"0\" />\r\n          <SubbehaviorNode id=\"58\" />\r\n          <ConditionEvalNode
     id=\"59\" />\r\n        </data>\r\n      </_data>\r\n    </SubbehaviorNode>\r\n
