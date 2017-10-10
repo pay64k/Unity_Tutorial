@@ -12,6 +12,7 @@ public class GunBehaviour : MonoBehaviour {
     public float fireRate = 30f;
     public int maxAmmo = 30;
     public float reloadTime = 1f;
+    public float impactForce = 10f;
 
     public Text ammoText;
     public GameObject reloadBar;
@@ -63,10 +64,15 @@ public class GunBehaviour : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-            TargetBehaviour target = hit.transform.GetComponent<TargetBehaviour>();
+            TntEnemyBehaviour target = hit.transform.GetComponent<TntEnemyBehaviour>();
             if(target != null)
             {
                 target.TakeDamage(damage);
+            }
+
+            if(hit.rigidbody != null)
+            {
+                //hit.rigidbody.AddExplosionForce(-hit.normal * impactForce);
             }
 
             GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
