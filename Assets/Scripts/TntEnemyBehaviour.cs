@@ -35,7 +35,7 @@ public class TntEnemyBehaviour : MonoBehaviour {
         navCollider = GameObject.Find("Navigation").GetComponent<BoxCollider>();
         startX = (navCollider.bounds.center - navCollider.bounds.size / 2).x;
         startZ = (navCollider.bounds.center - navCollider.bounds.size / 2).z;
-        InvokeRepeating("PickWayPoint", 0f, 2f);
+        InvokeRepeating("PickWayPoint", 0f, 3f);
     }
 
     void FixedUpdate()
@@ -48,11 +48,12 @@ public class TntEnemyBehaviour : MonoBehaviour {
 
     private void Chase()
     {
-        transform.LookAt(player.transform);
+        //transform.LookAt(player.transform);
         Vector3 direction = player.transform.position - transform.position;
+        direction.y = 0;
         float magnitude = direction.magnitude;
 
-        if (magnitude < 10f || gotShoot )
+        if (magnitude < 100f || gotShoot )
         {
             MoveTowards(direction, rb);
         }
@@ -64,16 +65,26 @@ public class TntEnemyBehaviour : MonoBehaviour {
 
     private void Wander()
     {
-        transform.LookAt(wayPoint);
+        //transform.LookAt(wayPoint);
         MoveTowards(wayPoint - transform.position, rb);
     }
 
     private void MoveTowards(Vector3 direction, Rigidbody rb)
     {
         direction.Normalize();
-        Vector3 velocity = direction * moveSpeed;
+
+        //Vector3 velocity = direction * moveSpeed;
         //rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
-        transform.position = transform.position + direction * Time.deltaTime * moveSpeed;
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, direction * 5f , Color.red);
+        if(Physics.Raycast(transform.position, direction, out hit, 1f, -1))
+        {
+            if(hit.transform.name != "Player")
+                direction += hit.normal * 50;
+        }
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);
+        transform.position += transform.forward * Time.deltaTime * moveSpeed;
     }
 
     private void PickWayPoint()
