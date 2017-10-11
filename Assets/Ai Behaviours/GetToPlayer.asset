@@ -67,7 +67,7 @@ MonoBehaviour:
     />\r\n          <ParallelNode id=\"61\" />\r\n          <SubbehaviorNode id=\"58\"
     />\r\n          <ConditionEvalNode id=\"59\" />\r\n          <RepeatDecorator
     id=\"63\" />\r\n        </nodes>\r\n      </_nodes>\r\n      <_selectedNode>\r\n
-    \       <ConditionEvalNode id=\"53\" />\r\n      </_selectedNode>\r\n    </BehaviorTree>\r\n
+    \       <SubbehaviorNode id=\"58\" />\r\n      </_selectedNode>\r\n    </BehaviorTree>\r\n
     \   <RepeatDecorator id=\"63\">\r\n      <_data>\r\n        <data selected=\"False\"
     position=\"182.6087 -42.23602\" name=\"Repeat\" description=\"Repeats the execution
     of its child node\" cardinality=\"1\" hasParent=\"False\">\r\n          <BehaviorTree
@@ -89,7 +89,7 @@ MonoBehaviour:
     \         <BehaviorTree id=\"0\" />\r\n          <PrioritySelectorNode id=\"37\"
     />\r\n          <ParallelNode id=\"61\" />\r\n        </data>\r\n      </_data>\r\n
     \   </PrioritySelectorNode>\r\n    <ConditionEvalNode id=\"53\">\r\n      <_data>\r\n
-    \       <data selected=\"True\" position=\"0 0\" name=\"Perception/IsTargetClose\"
+    \       <data selected=\"False\" position=\"0 0\" name=\"Perception/IsTargetClose\"
     description=\"Checks whether a target is close depending on a given distance\"
     cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n
     \         <ConditionEvalNode id=\"53\" />\r\n          <PrioritySelectorNode id=\"37\"
@@ -104,7 +104,7 @@ MonoBehaviour:
     hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ConditionEvalNode
     id=\"59\" />\r\n          <PrioritySelectorNode id=\"37\" />\r\n        </data>\r\n
     \     </_data>\r\n    </ConditionEvalNode>\r\n    <SubbehaviorNode id=\"58\" _name=\"Wander\">\r\n
-    \     <_data>\r\n        <data selected=\"False\" position=\"674 454.4792\" name=\"Wander\"
+    \     <_data>\r\n        <data selected=\"True\" position=\"674 454.4792\" name=\"Wander\"
     description=\"\" cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree
     id=\"0\" />\r\n          <SubbehaviorNode id=\"58\" />\r\n          <ConditionEvalNode
     id=\"59\" />\r\n        </data>\r\n      </_data>\r\n    </SubbehaviorNode>\r\n

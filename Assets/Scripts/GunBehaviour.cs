@@ -62,6 +62,7 @@ public class GunBehaviour : MonoBehaviour {
         currentAmmo--;
         ammoText.text = string.Concat(currentAmmo, "/", maxAmmo);
         RaycastHit hit;
+
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             TntEnemyBehaviour target = hit.transform.GetComponent<TntEnemyBehaviour>();

@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 54436733146032722}
   - component: {fileID: 136079715981765858}
   - component: {fileID: 114416576495258166}
-  - component: {fileID: 143072583401936586}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -191,14 +190,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1649016264288714}
-  m_LocalRotation: {x: -0, y: 0.0029521338, z: -0, w: 0.99999565}
-  m_LocalPosition: {x: -11.420053, y: 2.76, z: 24.476631}
+  m_LocalRotation: {x: -0, y: -0.5841598, z: -0, w: 0.8116387}
+  m_LocalPosition: {x: -10.768219, y: 2.76, z: 24.836657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4330007597207452}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0.33800003, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -71.48701, z: 0}
 --- !u!20 &20670242341156806
 Camera:
   m_ObjectHideFlags: 1
@@ -465,11 +464,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleFlash: {fileID: 198176097920637680}
   impactEffect: {fileID: 100006, guid: 0438351a6e6422d43a09930e9be00ee9, type: 2}
-  damage: 100
+  damage: 1
   range: 500
   fireRate: 5
   maxAmmo: 30
   reloadTime: 1
+  impactForce: 10
   ammoText: {fileID: 0}
   reloadBar: {fileID: 0}
   fpsCam: {fileID: 20670242341156806}
@@ -492,23 +492,6 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1.89
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &143072583401936586
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1649016264288714}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198176097920637680
 ParticleSystem:
