@@ -33,15 +33,17 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (isDying)
+            return;
+
         anim.SetBool("isIdle", true);
         float distance = Vector3.Distance(player.position, transform.position);
         isWandering = true;
+
         // If inside the radius
         if (distance <= lookRadius)
         {
             isWandering = false;
-            if (isDying)
-                return;
 
             // Move towards the player
             anim.SetBool("isWalking", true);
@@ -75,6 +77,7 @@ public class Enemy : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         dieEffect.Play();
         isDying = true;
+        isWandering = false;
         agent.SetDestination(transform.position);
         anim.SetBool("isDying",true);
         manager.enemyKilled(gameObject);

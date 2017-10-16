@@ -207,7 +207,7 @@ MonoBehaviour:
   - {fileID: 2107001231}
   maxEnemies: 10
   enemies: []
-  active: 0
+  active: 1
 --- !u!4 &27076514
 Transform:
   m_ObjectHideFlags: 0
@@ -9639,6 +9639,34 @@ Transform:
   m_Father: {fileID: 27076514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &832343980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 832343981}
+  m_Layer: 0
+  m_Name: HitEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &832343981
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832343980}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.09999879, y: 4.9000006, z: 0.3199928}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1629628676}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &843858212
 GameObject:
   m_ObjectHideFlags: 0
@@ -10098,6 +10126,14 @@ Prefab:
     - target: {fileID: 1876183577270114, guid: b6bf0ccf237042f4bbf355e4e819a2a9, type: 2}
       propertyPath: m_Name
       value: Robot Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910923941522096, guid: b6bf0ccf237042f4bbf355e4e819a2a9, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876183577270114, guid: b6bf0ccf237042f4bbf355e4e819a2a9, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6bf0ccf237042f4bbf355e4e819a2a9, type: 2}
@@ -17734,6 +17770,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 666389998}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!4 &1629628676 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4174475527887832, guid: b6bf0ccf237042f4bbf355e4e819a2a9,
+    type: 2}
+  m_PrefabInternal: {fileID: 877279124}
 --- !u!43 &1710464780
 Mesh:
   m_ObjectHideFlags: 0
@@ -20119,6 +20160,10 @@ Prefab:
     - target: {fileID: 4174475527887832, guid: b6bf0ccf237042f4bbf355e4e819a2a9, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876183577270114, guid: b6bf0ccf237042f4bbf355e4e819a2a9, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6bf0ccf237042f4bbf355e4e819a2a9, type: 2}
