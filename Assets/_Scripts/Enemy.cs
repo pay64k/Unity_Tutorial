@@ -1,5 +1,4 @@
 ﻿using UnityEngine.AI;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,16 +6,24 @@ public class Enemy : MonoBehaviour
 
     public float health = 50f;
     public float lookRadius = 10f;
-    public float deadTime = 3f;
+    public float idleTime = 3f;
+    public float wanderTime = 5f;
+    public float dyingTime = 3f;
     public ParticleSystem dieEffect;
 
-    Transform player;
-    bool gotShoot = false;
     bool isDying = false;
-    bool isWandering = true;
+    bool isWandering = false;
+    bool isIdle = true;
+    bool isFollowing = false;
+
+    float idlingTime = 0f;
+    float wanderigTime = 0f;
+
+    Transform player;
     EnemyManager manager;
     Animator anim;
     NavMeshAgent agent;
+    Vector3 wanderPickedDestination;
 
     void Start()
     {
@@ -26,50 +33,81 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
-        InvokeRepeating("Wander", 0, Random.Range(2f,5f));
+        InvokeRepeating("PickWanderingDestination", 0, 0.5f);
     }
 
-    
+    // This is rather crude and not easy to extend method. It is also very specific to idle-wander-follow-attack routine.
+    // It should be redone follwoing one of the "mofre flexible" and modern methods for example like this tutorial here:
+    // https://www.youtube.com/watch?v=cHUXh5biQMg&t=1s
 
     void Update()
     {
         if (isDying)
+        {
             return;
+        }
 
-        anim.SetBool("isIdle", true);
+        if (idlingTime <= idleTime)
+        {
+            if (isIdle && !isFollowing)
+            {
+                anim.SetBool("isIdle", true);
+                anim.SetBool("isWalking", false);
+                isWandering = false;
+                agent.SetDestination(gameObject.transform.position);
+                idlingTime += Time.deltaTime;
+            }
+        }
+        else
+        {
+            idlingTime = 0f;
+            isIdle = false;
+            isWandering = true;
+            agent.SetDestination(wanderPickedDestination);
+        }
+
+        if (wanderigTime <= wanderTime)
+        {
+            if (isWandering && !isFollowing)
+            {
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isWalking", true);
+                isWandering = true;
+                wanderigTime += Time.deltaTime;
+            }
+        }
+        else
+        {
+            wanderigTime = 0f;
+            isIdle = true;
+            isWandering = false;
+        }
+
         float distance = Vector3.Distance(player.position, transform.position);
-        isWandering = true;
 
-        // If inside the radius
         if (distance <= lookRadius)
         {
-            isWandering = false;
-
-            // Move towards the player
+            isFollowing = true;
             anim.SetBool("isWalking", true);
             anim.SetBool("isIdle", false);
             agent.SetDestination(player.position);
+
             if (distance <= agent.stoppingDistance)
             {
                 // Attack
-                FaceTarget();
             }
+        }
+        else
+        {
+            isFollowing = false;
         }
     }
 
     public void TakeDamage(float amount)
     {
-        gotShoot = true;
         health -= amount;
         if (health <= 0 && !isDying)
             Die();
-    }
-
-    void FaceTarget()
-    {
-        Vector3 direction = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     void Die()
@@ -77,24 +115,19 @@ public class Enemy : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         dieEffect.Play();
         isDying = true;
-        isWandering = false;
         agent.SetDestination(transform.position);
         anim.SetBool("isDying",true);
         manager.enemyKilled(gameObject);
-        Destroy(gameObject, deadTime);
+        Destroy(gameObject, dyingTime);
     }
 
-    void Wander()
+    void PickWanderingDestination()
     {
-        if (isWandering)
-        {
-            Vector3 randomDirection = Random.insideUnitSphere * 100;
-            randomDirection += transform.position;
-            NavMeshHit hit;
-            NavMesh.SamplePosition(randomDirection, out hit, 100, 1);
-            Vector3 finalPosition = hit.position;
-            agent.destination = finalPosition;
-        }
+        Vector3 randomDirection = Random.insideUnitSphere * 100;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, 100, 1);
+        wanderPickedDestination = hit.position;
     }
 
     void OnDrawGizmosSelected()
