@@ -1,5 +1,6 @@
 ﻿using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class Enemy : MonoBehaviour
     public float wanderTime = 5f;
     public float dyingTime = 3f;
     public ParticleSystem dieEffect;
+    public float damage = 10f;
+
+    public float attackSpeed = 1f;
+
+    private PlayerStats stats;
+    private float attackTimer = 0f;
 
     bool isDying = false;
     bool isWandering = false;
@@ -21,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     Transform player;
     EnemyManager manager;
-    Animator anim;
+    
     NavMeshAgent agent;
     Vector3 wanderPickedDestination;
 
@@ -30,8 +37,9 @@ public class Enemy : MonoBehaviour
         manager = GameObject.Find("Enemy Spawner").GetComponent<EnemyManager>();
         player = GameObject.Find("Player").transform;
 
-        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+
+        stats = GameObject.Find("Player").GetComponent<PlayerStats>();
 
         InvokeRepeating("PickWanderingDestination", 0, 0.5f);
     }
@@ -51,8 +59,6 @@ public class Enemy : MonoBehaviour
         {
             if (isIdle && !isFollowing)
             {
-                anim.SetBool("isIdle", true);
-                anim.SetBool("isWalking", false);
                 isWandering = false;
                 agent.SetDestination(gameObject.transform.position);
                 idlingTime += Time.deltaTime;
@@ -70,8 +76,6 @@ public class Enemy : MonoBehaviour
         {
             if (isWandering && !isFollowing)
             {
-                anim.SetBool("isIdle", false);
-                anim.SetBool("isWalking", true);
                 isWandering = true;
                 wanderigTime += Time.deltaTime;
             }
@@ -88,13 +92,18 @@ public class Enemy : MonoBehaviour
         if (distance <= lookRadius)
         {
             isFollowing = true;
-            anim.SetBool("isWalking", true);
-            anim.SetBool("isIdle", false);
             agent.SetDestination(player.position);
-
+            //distance = Vector3.Distance(player.position, transform.position);
+            //print(distance.ToString() + " " + agent.stoppingDistance.ToString());
             if (distance <= agent.stoppingDistance)
             {
-                // Attack
+                //player.GetComponent<PlayerStats>().
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= attackSpeed)
+                {
+                    stats.TakeDamage(damage);
+                    attackTimer = 0f;
+                }
             }
         }
         else
@@ -116,7 +125,6 @@ public class Enemy : MonoBehaviour
         dieEffect.Play();
         isDying = true;
         agent.SetDestination(transform.position);
-        anim.SetBool("isDying",true);
         manager.enemyKilled(gameObject);
         Destroy(gameObject, dyingTime);
     }
